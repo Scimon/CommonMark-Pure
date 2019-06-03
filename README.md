@@ -3,7 +3,7 @@
 NAME
 ====
 
-CommonMark::PP6 - blah blah blah
+CommonMark::PP6 - Pure Perl Implementation of CommonMark spec.
 
 SYNOPSIS
 ========

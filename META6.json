@@ -4,7 +4,7 @@
   ],
   "build-depends" : [ ],
   "depends" : [ ],
-  "description" : "blah blah blah",
+  "description" : "Pure Perl Implementation of CommonMark spec.",
   "license" : "Artistic-2.0",
   "name" : "CommonMark::PP6",
   "perl" : "6.c",
