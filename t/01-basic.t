@@ -1,7 +1,5 @@
-use v6.c;
+use v6;
 use Test;
-use CommonMark::PP6;
-
-pass "replace me";
+use-ok "CommonMark::PP6";
 
 done-testing;

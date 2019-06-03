@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Scimon/P6-CommonMark-PP6.svg?branch=master)](https://travis-ci.org/Scimon/P6-CommonMark-PP6)
+
 NAME
 ====
 

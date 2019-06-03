@@ -12,8 +12,10 @@
     "CommonMark::PP6" : "lib/CommonMark/PP6.pm6"
   },
   "resources" : [ ],
-  "source-url" : "",
+  "source-url" : "https://github.com/Scimon/P6-CommonMark-PP6.git",
   "tags" : [ ],
-  "test-depends" : [ ],
+  "test-depends" : [
+    "JSON::Fast"
+  ],
   "version" : "0.0.1"
 }

@@ -1,6 +1,9 @@
 use v6.c;
 unit class CommonMark::PP6:ver<0.0.1>;
 
+method to-html( Str $markdown ) {
+    return $markdown;
+}
 
 =begin pod
 
@@ -31,3 +34,4 @@ Copyright 2019 Simon Proctor
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
 =end pod
+
