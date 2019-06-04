@@ -26,35 +26,58 @@ class Text {
 }
 
 grammar Markdown {
-    token TOP { <line>+ }
-    token line { <-[\n]>+ \n? }
+    token TOP { <block>+ }
+    token block { <block-type> \n? }
+    token block-type { <heading> || <para> }
+    token para { <-[ \n ]>+ }
+    token heading { ("#"**1..6) " " (<-[ \n ]>+) }
 }
 
 class MarkdownAction {
-    has $.text;
-    has $!current;
-    has @!lines = [];
+    has $.html;
+    has $!current-block;
+    has @!blocks = [];
 
     method TOP($/) {
 	
-	if $!current {
-	    @!lines.push( $!current );
-	}
-	$!text = make @!lines.map( *.render ).join("");
+        if $!current-block {
+            @!blocks.push( $!current-block );
+        }
+        $!html = make @!blocks.map( *.render ).join("");
     }
 
-    method line($/) {
-	note $!current;
-	if $!current {
-	    if $!current.tag ~~ 'p' {
-		$!current.content.push( Text.new( :text($/.Str) ) );
-	    } else {
-		make $!current.clone;
-		$!current = Node.new( :tag<p>, :content[ Text.new( :text($/.Str) ) ] );
-	    }
-	} else {
-	    $!current = Node.new( :tag<p>, :content[ Text.new( :text($/.Str) ) ] );
-	}
+    method block-type($/) {
+        note "bt";
+        given $/ {
+            when $/<heading> { note "h"; make $_<heading> }
+            when $/<para> { note "p"; make $_<para> }
+        }
+    }
+
+    method heading($/) {
+        my $level = $/[0].Str.elems;
+        note $level;
+        make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $/[1].Str ))] );
+    }
+
+    method para($/)  {
+       make Node.new( :tag( "p", :content[ Text.new( :text( $/.Str ))]));
+    }
+
+    method block($/) {
+        note $/.perl;
+        note $<block-type>.made;
+        my $made = $<block-type>.made;
+        if $!current-block.tag {
+            if $!current-block.tag ~~ $made.tag  {
+                $!current-block.content.push( | $made.content );
+            } else {
+                make $!current-block.clone;
+                $!current-block = $made.clone;
+            }
+        } else {
+            $!current-block = $made.clone;
+        }
     }
 }
 
@@ -63,7 +86,7 @@ method to-html( Str $markdown ) {
     my $actions = MarkdownAction.new;
     my $match = Markdown.parse( $markdown, :$actions );
         
-    return "{$actions.text}\n";
+    return "{$actions.html}\n";
 }
 
 
