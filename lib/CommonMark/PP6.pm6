@@ -11,7 +11,7 @@ class Node {
     submethod BUILD( :$!tag, :@!content ) {}
     
     method render {
-	"<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
+	    "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
     }
 }
 
@@ -21,7 +21,7 @@ class Text {
     submethod BUILD( :$!text ) {}
     
     method render {
-	$!text;
+	    $!text;
     }
 }
 
@@ -47,32 +47,28 @@ class MarkdownAction {
     }
 
     method block-type($/) {
-        note "bt";
         given $/ {
-            when $/<heading> { note "h"; make $_<heading> }
-            when $/<para> { note "p"; make $_<para> }
+            when $_<heading> { make $_<heading>.made }
+            when $_<para> { make $_<para>.made }
         }
     }
 
     method heading($/) {
-        my $level = $/[0].Str.elems;
-        note $level;
+        my $level = $/[0].Str.codes;
         make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $/[1].Str ))] );
     }
 
     method para($/)  {
-       make Node.new( :tag( "p", :content[ Text.new( :text( $/.Str ))]));
+       make Node.new( :tag( "p" ), :content[ Text.new( :text( $/.Str ))]);
     }
 
     method block($/) {
-        note $/.perl;
-        note $<block-type>.made;
         my $made = $<block-type>.made;
-        if $!current-block.tag {
+        if $!current-block {
             if $!current-block.tag ~~ $made.tag  {
                 $!current-block.content.push( | $made.content );
             } else {
-                make $!current-block.clone;
+                @!blocks.push( $!current-block.clone );
                 $!current-block = $made.clone;
             }
         } else {
