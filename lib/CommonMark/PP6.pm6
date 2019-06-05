@@ -28,7 +28,7 @@ grammar Markdown {
     token block { <block-type> \n? }
     token block-type { <heading> || <para> }
     token para { <-[ \n ]>+ }
-    token heading { " "**0..3 ("#"**1..6) " " (<-[ \n ]>+) }
+    token heading { " "**0..3 ("#"**1..6) " " (<-[ \# \n ]>+) "#"* }
 }
 
 class MarkdownAction {
