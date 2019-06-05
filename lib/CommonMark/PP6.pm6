@@ -28,7 +28,7 @@ grammar Markdown {
     token block { <block-type> \n? }
     token block-type { <heading> || <para> }
     token para { <-[ \n ]>+ }
-    token heading { " "**0..3 ("#"**1..6) " " (<-[ \# \n ]>+) "#"* }
+    token heading { " "**0..3 ("#"**1..6) " " (<-[ \# \n ]>+) "#"* " "* }
 }
 
 class MarkdownAction {
@@ -41,7 +41,7 @@ class MarkdownAction {
         if $!current-block {
             @!blocks.push( $!current-block );
         }
-        $!html = make @!blocks.map( *.render ).join("");
+        $!html = make @!blocks.map( *.render ).join("\n");
     }
 
     method block-type($/) {
