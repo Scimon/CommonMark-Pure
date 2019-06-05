@@ -2,8 +2,6 @@ use v6;
 
 unit class CommonMark::PP6:ver<0.0.1>;
 
-use Grammar::Tracer;
-
 class Node {
     has Str $.tag;
     has @.content;
@@ -30,7 +28,7 @@ grammar Markdown {
     token block { <block-type> \n? }
     token block-type { <heading> || <para> }
     token para { <-[ \n ]>+ }
-    token heading { ("#"**1..6) " " (<-[ \n ]>+) }
+    token heading { " "**0..3 ("#"**1..6) " " (<-[ \n ]>+) }
 }
 
 class MarkdownAction {
