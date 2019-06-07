@@ -2,6 +2,20 @@ use v6;
 
 unit class CommonMark::PP6:ver<0.0.1>;
 
+class Text {
+    has Str $!text;
+
+    submethod BUILD( :$!text ) {}
+
+    method perl { "Text:\{{$!text}\}" }
+
+    method Str { $!text }
+
+    method render {
+	    $!text;
+    }
+}
+
 class Node {
     has Str $.tag;
     has @.content;
@@ -11,17 +25,17 @@ class Node {
     method render {
 	    "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
     }
-}
 
-class Text {
-    has Str $!text;
-
-    submethod BUILD( :$!text ) {}
-    
-    method render {
-	    $!text;
+    method merge ( Node $new ) {
+        if ( $new.tag ne $!tag ) {
+            return (self, $new);
+        }
+        @!content = [ | @!content, Text.new( :text("\n" ) ), | $new.content ];
+        return ( self );
     }
 }
+
+
 
 grammar Markdown {
     token TOP { <block>+ }
