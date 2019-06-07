@@ -30,7 +30,7 @@ class Node {
         if ( $new.tag ne $!tag ) {
             return (self, $new);
         }
-        @!content = [ | @!content, Text.new( :text("\n" ) ), | $new.content ];
+        @!content = [ | @!content, | $new.content ];
         return ( self );
     }
 }
@@ -77,11 +77,11 @@ class MarkdownAction {
     method block($/) {
         my $made = $<block-type>.made;
         if $!current-block {
-            if $!current-block.tag ~~ $made.tag  {
-                $!current-block.content.push( | $made.content );
-            } else {
+            my $new;
+            ( $!current-block, $new ) = $!current-block.merge( $made );
+            if ( $new ) {
                 @!blocks.push( $!current-block.clone );
-                $!current-block = $made.clone;
+                $!current-block = $new.clone;
             }
         } else {
             $!current-block = $made.clone;

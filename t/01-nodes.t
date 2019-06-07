@@ -29,7 +29,7 @@ my ( $m1, $m2 ) = $single-para.merge( $para2 );
 ok $m1 ~~ CommonMark::PP6::Node, "{$m1.perl} is a Node";
 ok $m2 ~~ Any, "Merge occured";
 
-is $m1.render, "<p>test\ntest2</p>", "Paragraph Merge OK";
+is $m1.render, "<p>testtest2</p>", "Paragraph Merge OK";
 
 
 done-testing;
