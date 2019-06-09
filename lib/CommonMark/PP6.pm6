@@ -60,10 +60,10 @@ class Blank does Node {
 grammar Markdown {
     token TOP { <block>+ }
     token block { <block-type> }
-    token block-type { <blank> || <rule> || <heading> || <para> }
+    token block-type { <rule> || <atx-heading> || <para> || <blank> }
     token blank { \n }
     token para { <-[ \n ]>+ \n }
-    token heading { " "**0..3 ("#"**1..6) " "+ (<-[ \# \n ]>+) "#"* " "* \n }
+    token atx-heading { " "**0..3 ("#"**1..6) (" " (<-[ \n ]>*))? \n }
     token rule { " "**0..3 ( <rule-star> | <rule-dash> | <rule-under> ) " "* \n }
     token rule-star  { "*" " "* "*" " "* "*" (" "|"*")* }
     token rule-dash  { "-" " "* "-" " "* "-" (" "|"-")* }
@@ -83,7 +83,7 @@ class MarkdownAction {
     }
 
     method block-type($/) {
-        for <blank heading para rule> -> $type {
+        for <blank atx-heading para rule> -> $type {
             when $/{$type} {
                 make $/{$type}.made;
                 last;
@@ -91,9 +91,13 @@ class MarkdownAction {
         }
     }
 
-    method heading($/) {
+    method atx-heading($/) {
         my $level = $/[0].Str.codes;
-        make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $/[1].Str ))] );
+        my $text = $/[1][0].Str;
+        
+        $text = $text.subst( / <!after "\\"> "#"+ " "* $/, '' ).subst( / "\\" /, '', :g );
+                
+        make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $text ))] );
     }
 
     method para($/)  {
