@@ -18,7 +18,7 @@ class Text does Renderable {
     method Str { $!text }
 
     method render {
-	    $!text;
+        $!text;
     }
 }
 
@@ -27,7 +27,7 @@ role Node does Renderable {
     has @.content;
 
     submethod BUILD( :$!tag = "", :@!content = [] ) {}
-    
+
     method render {
         "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
     }
@@ -41,7 +41,7 @@ role Node does Renderable {
     }
 }
 
-class Rule does Node {    
+class Rule does Node {
     method render { "<hr />" }
 
     method merge ( Node $new ) {
@@ -67,7 +67,6 @@ class MarkdownAction {
     has @!blocks = [];
 
     method TOP($/) {
-	
         if $!current-block {
             @!blocks.push( $!current-block );
         }
@@ -78,7 +77,7 @@ class MarkdownAction {
         given $/ {
             when $_<heading> { make $_<heading>.made }
             when $_<para> { make $_<para>.made }
-	    when $_<rule> { make $_<rule>.made }
+            when $_<rule> { make $_<rule>.made }
         }
     }
 
@@ -92,7 +91,7 @@ class MarkdownAction {
     }
 
     method rule($/) {
-	make Rule.new();
+        make Rule.new();
     }
 
     method block($/) {
@@ -114,7 +113,6 @@ method to-html( Str $markdown is copy ) {
     if ( $markdown !~~ m!\n$! ) { $markdown ~= "\n" }
     my $actions = MarkdownAction.new;
     my $match = Markdown.parse( $markdown, :$actions );
-        
     return "{$actions.html}\n";
 }
 
