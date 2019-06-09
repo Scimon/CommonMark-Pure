@@ -49,12 +49,21 @@ class Rule does Node {
     }
 }
 
+class Blank does Node {
+    method render { "" }
+
+    method merge ( Node $new ) {
+        return ( $new );
+    }
+}
+
 grammar Markdown {
     token TOP { <block>+ }
     token block { <block-type> }
-    token block-type { <rule> || <heading> || <para> }
+    token block-type { <blank> || <rule> || <heading> || <para> }
+    token blank { \n }
     token para { <-[ \n ]>+ \n }
-    token heading { " "**0..3 ("#"**1..6) " " (<-[ \# \n ]>+) "#"* " "* \n }
+    token heading { " "**0..3 ("#"**1..6) " "+ (<-[ \# \n ]>+) "#"* " "* \n }
     token rule { " "**0..3 ( <rule-star> | <rule-dash> | <rule-under> ) " "* \n }
     token rule-star  { "*" " "* "*" " "* "*" (" "|"*")* }
     token rule-dash  { "-" " "* "-" " "* "-" (" "|"-")* }
@@ -74,10 +83,11 @@ class MarkdownAction {
     }
 
     method block-type($/) {
-        given $/ {
-            when $_<heading> { make $_<heading>.made }
-            when $_<para> { make $_<para>.made }
-            when $_<rule> { make $_<rule>.made }
+        for <blank heading para rule> -> $type {
+            when $/{$type} {
+                make $/{$type}.made;
+                last;
+            }
         }
     }
 
@@ -92,6 +102,10 @@ class MarkdownAction {
 
     method rule($/) {
         make Rule.new();
+    }
+
+    method blank($/) {
+        make Blank.new();
     }
 
     method block($/) {
@@ -146,4 +160,3 @@ Copyright 2019 Simon Proctor
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
 =end pod
-
