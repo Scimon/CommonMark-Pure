@@ -22,7 +22,7 @@ my $em-para = CommonMark::PP6::Node.new( :tag<p>,
 				       );
 is $em-para.render, "<p>test1 <em>test2</em> test3</p>", "Nested Item Render works";
 
-my $para2 =  CommonMark::PP6::Node.new( :tag<p>, :content[CommonMark::PP6::Text.new( :text("test2") )] );
+my $para2 = CommonMark::PP6::Node.new( :tag<p>, :content[CommonMark::PP6::Text.new( :text("test2") )] );
 
 my ( $m1, $m2 ) = $single-para.merge( $para2 );
 
@@ -31,5 +31,7 @@ ok $m2 ~~ Any, "Merge occured";
 
 is $m1.render, "<p>testtest2</p>", "Paragraph Merge OK";
 
+#my $first = CommonMark::PP6::Node.new( :tag<p>, :content[CommonMark::PP6::Text.new( :text("test") )] );
+#my $continue = CommonMark::PP6::Continue.new( :content[CommonMark::PP6::Text.new( :text("test2") )] );
 
 done-testing;

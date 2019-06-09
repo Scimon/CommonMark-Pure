@@ -2,7 +2,13 @@ use v6;
 
 unit class CommonMark::PP6:ver<0.0.1>;
 
-class Text {
+use Grammar::Tracer;
+
+role Renderable {
+    method render {...}
+}
+
+class Text does Renderable {
     has Str $!text;
 
     submethod BUILD( :$!text ) {}
@@ -16,14 +22,14 @@ class Text {
     }
 }
 
-class Node {
+role Node does Renderable {
     has Str $.tag;
     has @.content;
 
-    submethod BUILD( :$!tag, :@!content ) {}
+    submethod BUILD( :$!tag = "", :@!content = [] ) {}
     
     method render {
-	    "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
+        "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
     }
 
     method merge ( Node $new ) {
@@ -35,14 +41,24 @@ class Node {
     }
 }
 
+class Rule does Node {    
+    method render { "<hr />" }
 
+    method merge ( Node $new ) {
+        return ( self, $new );
+    }
+}
 
 grammar Markdown {
     token TOP { <block>+ }
-    token block { <block-type> \n? }
-    token block-type { <heading> || <para> }
-    token para { <-[ \n ]>+ }
-    token heading { " "**0..3 ("#"**1..6) " " (<-[ \# \n ]>+) "#"* " "* }
+    token block { <block-type> }
+    token block-type { <rule> || <heading> || <para> }
+    token para { <-[ \n ]>+ \n }
+    token heading { " "**0..3 ("#"**1..6) " " (<-[ \# \n ]>+) "#"* " "* \n }
+    token rule { " "**0..3 ( <rule-star> | <rule-dash> | <rule-under> ) " "* \n }
+    token rule-star  { "*" " "* "*" " "* "*" (" "|"*")* }
+    token rule-dash  { "-" " "* "-" " "* "-" (" "|"-")* }
+    token rule-under { "_" " "* "_" " "* "_" (" "|"_")* }
 }
 
 class MarkdownAction {
@@ -62,6 +78,7 @@ class MarkdownAction {
         given $/ {
             when $_<heading> { make $_<heading>.made }
             when $_<para> { make $_<para>.made }
+	    when $_<rule> { make $_<rule>.made }
         }
     }
 
@@ -72,6 +89,10 @@ class MarkdownAction {
 
     method para($/)  {
        make Node.new( :tag( "p" ), :content[ Text.new( :text( $/.Str ))]);
+    }
+
+    method rule($/) {
+	make Rule.new();
     }
 
     method block($/) {
@@ -89,8 +110,8 @@ class MarkdownAction {
     }
 }
 
-method to-html( Str $markdown ) {
-    my $chomped = $markdown.chomp;
+method to-html( Str $markdown is copy ) {
+    if ( $markdown !~~ m!\n$! ) { $markdown ~= "\n" }
     my $actions = MarkdownAction.new;
     my $match = Markdown.parse( $markdown, :$actions );
         
