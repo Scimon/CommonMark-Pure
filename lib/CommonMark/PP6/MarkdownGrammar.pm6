@@ -1,5 +1,7 @@
 use v6;
 
+#use Grammar::Tracer;
+
 grammar CommonMark::PP6::MarkdownGrammar is export {
     token TOP { <block>+ }
     token block { <block-type> }

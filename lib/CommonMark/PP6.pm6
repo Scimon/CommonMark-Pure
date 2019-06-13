@@ -5,8 +5,6 @@ unit class CommonMark::PP6:ver<0.0.1>;
 use CommonMark::PP6::MarkdownGrammar;
 use CommonMark::PP6::MarkdownActions;
 
-use Grammar::Tracer;
-
 method to-html( Str $markdown is copy ) {
     if ( $markdown !~~ m!\n$! ) { $markdown ~= "\n" }
     my $actions = MarkdownActions.new;
