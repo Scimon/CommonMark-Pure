@@ -9,8 +9,7 @@
   "name" : "CommonMark::PP6",
   "perl" : "6.c",
   "provides" : {
-    "CommonMark::PP6" : "lib/CommonMark/PP6.pm6",
-    "CommonMark::PP6::HRule" : "lib/CommonMark/PP6/HRule.pm6"
+    "CommonMark::PP6" : "lib/CommonMark/PP6.pm6"
   },
   "resources" : [ ],
   "source-url" : "https://github.com/Scimon/P6-CommonMark-PP6.git",

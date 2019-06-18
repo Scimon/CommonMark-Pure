@@ -45,7 +45,7 @@ class CommonMark::PP6::MarkdownActions is export {
     }
 
     method para($/)  {
-       make Para.new( :tag( "p" ), :content[ Text.new( :text( $/.Str ))]);
+       make Para.new( :tag( "p" ), :content[ Text.new( :text( $/<text>.Str ))]);
     }
 
     method hrule($/) {
