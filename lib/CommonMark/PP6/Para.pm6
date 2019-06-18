@@ -11,7 +11,7 @@ class CommonMark::PP6::Para does Node is export {
     }
 
     multi method merge ( CommonMark::PP6::Para $new ) {
-        $new.content = [ self.content, Text.new( text => "\n"), $new.content ];
+        $new.content = [ |self.content, Text.new( text => "\n"), |$new.content ];
         return ( $new );
     }
 }
