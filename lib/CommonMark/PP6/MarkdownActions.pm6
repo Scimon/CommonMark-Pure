@@ -30,7 +30,7 @@ class CommonMark::PP6::MarkdownActions is export {
 
     method atx-heading($/) {
         my $level = $/[0].Str.codes;
-        my $text = $/[1][0] ?? $/[1][0].Str !! "";
+        my $text = $/[1]<text> ?? $/[1]<text>.Str !! "";
         
         $text = $text.subst( / <!after "\\"> "#"+ " "* $/, '' ).subst( / "\\" /, '', :g );
                 
