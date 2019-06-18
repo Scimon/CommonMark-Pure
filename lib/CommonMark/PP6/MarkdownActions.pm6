@@ -2,7 +2,7 @@ use v6;
 
 use CommonMark::PP6::Text;
 use CommonMark::PP6::Node;
-use CommonMark::PP6::Rule;
+use CommonMark::PP6::HRule;
 use CommonMark::PP6::Blank;
 
 class CommonMark::PP6::MarkdownActions is export {
@@ -18,7 +18,7 @@ class CommonMark::PP6::MarkdownActions is export {
     }
 
     method block-type($/) {
-        for <blank atx-heading para rule> -> $type {
+        for <blank atx-heading para hrule> -> $type {
             when $/{$type} {
                 make $/{$type}.made;
                 last;
@@ -39,8 +39,8 @@ class CommonMark::PP6::MarkdownActions is export {
        make Node.new( :tag( "p" ), :content[ Text.new( :text( $/.Str ))]);
     }
 
-    method rule($/) {
-        make Rule.new();
+    method hrule($/) {
+        make HRule.new();
     }
 
     method blank($/) {
