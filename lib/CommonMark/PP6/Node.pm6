@@ -12,7 +12,7 @@ role CommonMark::PP6::Node does Renderable is export {
         "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
     }
 
-    method merge ( CommonMark::PP6::Node $new ) {
+    multi method merge ( CommonMark::PP6::Node $new ) {
         if ( $new.tag ne $!tag ) {
             return (self, $new);
         }

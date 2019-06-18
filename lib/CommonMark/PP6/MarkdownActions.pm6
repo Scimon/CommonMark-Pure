@@ -4,6 +4,8 @@ use CommonMark::PP6::Text;
 use CommonMark::PP6::Node;
 use CommonMark::PP6::HRule;
 use CommonMark::PP6::Blank;
+use CommonMark::PP6::Para;
+use CommonMark::PP6::SetXHeading;
 
 class CommonMark::PP6::MarkdownActions is export {
     has $.html;
@@ -18,7 +20,7 @@ class CommonMark::PP6::MarkdownActions is export {
     }
 
     method block-type($/) {
-        for <blank atx-heading para hrule> -> $type {
+        for <blank setx-heading atx-heading para hrule> -> $type {
             when $/{$type} {
                 make $/{$type}.made;
                 last;
@@ -35,8 +37,15 @@ class CommonMark::PP6::MarkdownActions is export {
         make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $text ))] );
     }
 
+    method setx-heading($/) {
+
+        my $type = $/<type>[0].Str;
+
+        make SetXHeading.new( level => ($type ~~ "=" ?? 1 !! 2) );
+    }
+
     method para($/)  {
-       make Node.new( :tag( "p" ), :content[ Text.new( :text( $/.Str ))]);
+       make Para.new( :tag( "p" ), :content[ Text.new( :text( $/.Str ))]);
     }
 
     method hrule($/) {
