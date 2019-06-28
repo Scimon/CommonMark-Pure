@@ -6,6 +6,7 @@ use CommonMark::PP6::HRule;
 use CommonMark::PP6::Blank;
 use CommonMark::PP6::Para;
 use CommonMark::PP6::SetXHeading;
+use CommonMark::PP6::IndentedCode;
 
 class CommonMark::PP6::MarkdownActions is export {
     has $.html;
@@ -20,7 +21,7 @@ class CommonMark::PP6::MarkdownActions is export {
     }
 
     method block-type($/) {
-        for <blank setx-heading atx-heading para hrule> -> $type {
+        for <blank setx-heading atx-heading para hrule indented-code> -> $type {
             when $/{$type} {
                 make $/{$type}.made;
                 last;
@@ -37,6 +38,10 @@ class CommonMark::PP6::MarkdownActions is export {
         make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $text ))] );
     }
 
+    method indented-code($/) {
+        make IndentedCode.new( :content[ Text.new( :text( $/<text>.Str ) ) ] );
+    }
+    
     method setx-heading($/) {
 
         my $type = $/<type>[0].Str;

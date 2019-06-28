@@ -10,7 +10,6 @@ SYNOPSIS
 
 ```perl6
 use CommonMark::PP6;
-
 ```
 
 DESCRIPTION
@@ -29,3 +28,4 @@ COPYRIGHT AND LICENSE
 Copyright 2019 Simon Proctor
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+
