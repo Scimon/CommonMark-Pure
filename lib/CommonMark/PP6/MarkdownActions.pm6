@@ -35,7 +35,7 @@ class CommonMark::PP6::MarkdownActions is export {
         
         $text = $text.subst( / <!after "\\"> "#"+ " "* $/, '' ).subst( / "\\" /, '', :g );
                 
-        make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $text ))] );
+        make Node.new( :tag( "h{$level}" ), :content[ Text.new( :text( $text.trim ))] );
     }
 
     method indented-code($/) {
@@ -50,7 +50,7 @@ class CommonMark::PP6::MarkdownActions is export {
     }
 
     method para($/)  {
-       make Para.new( :tag( "p" ), :content[ Text.new( :text( $/<text>.Str ))]);
+       make Para.new( :tag( "p" ), :content[ Text.new( :text( $/<text>.Str.trim ))]);
     }
 
     method hrule($/) {
