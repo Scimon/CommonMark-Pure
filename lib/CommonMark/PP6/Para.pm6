@@ -3,6 +3,7 @@ use v6;
 use CommonMark::PP6::Node;
 use CommonMark::PP6::SetXHeading;
 use CommonMark::PP6::Text;
+use CommonMark::PP6::IndentedCode;
 
 class CommonMark::PP6::Para does Node is export {
     multi method merge ( SetXHeading $new ) {
@@ -14,4 +15,10 @@ class CommonMark::PP6::Para does Node is export {
         $new.content = [ |self.content, Text.new( text => "\n"), |$new.content ];
         return ( $new );
     }
+
+    multi method merge ( CommonMark::PP6::IndentedCode $new ) {
+        $new.content.map( { $_.trim = True } );
+        self.content = [ |self.content, Text.new( text => "\n"), |$new.content ];
+        return ( self );
+    }    
 }

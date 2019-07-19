@@ -4,6 +4,7 @@ use CommonMark::PP6::Renderable;
 
 class CommonMark::PP6::Text does Renderable is export {
     has Str $!text;
+    has Bool $.trim is rw = False;
 
     submethod BUILD( :$!text ) {}
 
@@ -12,6 +13,6 @@ class CommonMark::PP6::Text does Renderable is export {
     method Str { $!text }
 
     method render {
-        $!text;
+        self.trim ?? $!text.trim !! $!text;
     }
 }
