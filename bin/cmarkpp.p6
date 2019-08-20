@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 
 use v6;
-use CommonMark::PP6;
+use CommonMark::Pure;
 
 multi sub MAIN ( *@files ) {
     for @files -> $file {

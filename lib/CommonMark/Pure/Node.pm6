@@ -1,8 +1,8 @@
 use v6;
 
-use CommonMark::PP6::Renderable;
+use CommonMark::Pure::Renderable;
 
-role CommonMark::PP6::Node does Renderable is export {
+role CommonMark::Pure::Node does Renderable is export {
     has Str $.tag;
     has @.content;
 
@@ -12,7 +12,7 @@ role CommonMark::PP6::Node does Renderable is export {
         "<{$!tag}>{@.content.map( { $_.render } ).join("").chomp}</{$!tag}>";
     }
 
-    multi method merge ( CommonMark::PP6::Node $new ) {
+    multi method merge ( CommonMark::Pure::Node $new ) {
         if ( $new.tag ne $!tag ) {
             return (self, $new);
         }

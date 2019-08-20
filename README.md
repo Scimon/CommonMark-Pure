@@ -3,20 +3,20 @@
 NAME
 ====
 
-CommonMark::PP6 - Pure Perl Implementation of CommonMark spec.
+CommonMark::Pure - Non compiled Implementation of CommonMark spec.
 
 SYNOPSIS
 ========
 
 ```perl6
-use CommonMark::PP6;
+use CommonMark::Pure;
 
 ```
 
 DESCRIPTION
 ===========
 
-CommonMark::PP6 is ...
+CommonMark::Pure is ...
 
 AUTHOR
 ======

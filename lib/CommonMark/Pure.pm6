@@ -1,9 +1,9 @@
 use v6;
 
-unit class CommonMark::PP6:ver<0.0.1>:auth<github:scimon>;
+unit class CommonMark::Pure:ver<0.0.1>:auth<github:scimon>;
 
-use CommonMark::PP6::MarkdownGrammar;
-use CommonMark::PP6::MarkdownActions;
+use CommonMark::Pure::MarkdownGrammar;
+use CommonMark::Pure::MarkdownActions;
 
 method to-html( Str $markdown is copy ) {
     if ( $markdown !~~ m!\n$! ) { $markdown ~= "\n" }
@@ -17,19 +17,19 @@ method to-html( Str $markdown is copy ) {
 
 =head1 NAME
 
-CommonMark::PP6 - Pure Perl Implementation of CommonMark spec.
+CommonMark::Pure - Non compiled Implementation of CommonMark spec.
 
 =head1 SYNOPSIS
 
 =begin code :lang<perl6>
 
-use CommonMark::PP6;
+use CommonMark::Pure;
 
 =end code
 
 =head1 DESCRIPTION
 
-CommonMark::PP6 is ...
+CommonMark::Pure is ...
 
 =head1 AUTHOR
 

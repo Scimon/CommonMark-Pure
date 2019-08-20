@@ -1,8 +1,8 @@
 use v6;
 
-use CommonMark::PP6::Renderable;
+use CommonMark::Pure::Renderable;
 
-class CommonMark::PP6::Text does Renderable is export {
+class CommonMark::Pure::Text does Renderable is export {
     has Str $!text;
     has Bool $.trim is rw = False;
 

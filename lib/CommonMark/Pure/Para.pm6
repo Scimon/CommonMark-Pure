@@ -1,22 +1,22 @@
 use v6;
 
-use CommonMark::PP6::Node;
-use CommonMark::PP6::SetXHeading;
-use CommonMark::PP6::Text;
-use CommonMark::PP6::IndentedCode;
+use CommonMark::Pure::Node;
+use CommonMark::Pure::SetXHeading;
+use CommonMark::Pure::Text;
+use CommonMark::Pure::IndentedCode;
 
-class CommonMark::PP6::Para does Node is export {
+class CommonMark::Pure::Para does Node is export {
     multi method merge ( SetXHeading $new ) {
         $new.content = self.content;
         return ( $new );
     }
 
-    multi method merge ( CommonMark::PP6::Para $new ) {
+    multi method merge ( CommonMark::Pure::Para $new ) {
         $new.content = [ |self.content, Text.new( text => "\n"), |$new.content ];
         return ( $new );
     }
 
-    multi method merge ( CommonMark::PP6::IndentedCode $new ) {
+    multi method merge ( CommonMark::Pure::IndentedCode $new ) {
         $new.content.map( { $_.trim = True } );
         self.content = [ |self.content, Text.new( text => "\n"), |$new.content ];
         return ( self );

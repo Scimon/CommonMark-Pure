@@ -1,8 +1,8 @@
 use v6;
 
-use CommonMark::PP6::Node;
+use CommonMark::Pure::Node;
 
-class CommonMark::PP6::SetXHeading does Node is export {
+class CommonMark::Pure::SetXHeading does Node is export {
     has $.level;
 
     submethod BUILD( :$!level, :@!content = [] ) {}

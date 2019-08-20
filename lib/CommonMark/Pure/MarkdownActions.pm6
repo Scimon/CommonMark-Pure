@@ -1,14 +1,14 @@
 use v6;
 
-use CommonMark::PP6::Text;
-use CommonMark::PP6::Node;
-use CommonMark::PP6::HRule;
-use CommonMark::PP6::Blank;
-use CommonMark::PP6::Para;
-use CommonMark::PP6::SetXHeading;
-use CommonMark::PP6::IndentedCode;
+use CommonMark::Pure::Text;
+use CommonMark::Pure::Node;
+use CommonMark::Pure::HRule;
+use CommonMark::Pure::Blank;
+use CommonMark::Pure::Para;
+use CommonMark::Pure::SetXHeading;
+use CommonMark::Pure::IndentedCode;
 
-class CommonMark::PP6::MarkdownActions is export {
+class CommonMark::Pure::MarkdownActions is export {
     has $.html;
     has $!current-block;
     has @!blocks = [];

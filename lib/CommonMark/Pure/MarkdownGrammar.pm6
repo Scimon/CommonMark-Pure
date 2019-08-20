@@ -2,7 +2,7 @@ use v6;
 
 #use Grammar::Tracer;
 
-grammar CommonMark::PP6::MarkdownGrammar is export {
+grammar CommonMark::Pure::MarkdownGrammar is export {
     token TOP { <block>+ }
     token block { <block-type> }
     token block-type { <atx-heading> || <setx-heading> || <indented-code> || <hrule> || <para> || <blank> }
