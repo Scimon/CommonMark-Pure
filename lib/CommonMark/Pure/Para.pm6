@@ -3,6 +3,7 @@ use v6;
 use CommonMark::Pure::Node;
 use CommonMark::Pure::SetXHeading;
 use CommonMark::Pure::Text;
+use CommonMark::Pure::Break;
 use CommonMark::Pure::IndentedCode;
 
 class CommonMark::Pure::Para does Node is export {
@@ -12,7 +13,7 @@ class CommonMark::Pure::Para does Node is export {
     }
 
     multi method merge ( CommonMark::Pure::Para $new ) {
-        $new.content = [ |self.content, Text.new( text => "\n"), |$new.content ];
+        $new.content = [ |self.content, Break.new(), |$new.content ];
         return ( $new );
     }
 
