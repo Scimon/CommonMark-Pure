@@ -6,7 +6,7 @@ grammar CommonMark::Pure::MarkdownGrammar is export {
     token TOP { <block>+ }
     token block { <block-type> }
     token block-type { <atx-heading> || <setx-heading> || <indented-code> || <hrule> || <para> || <blank> }
-    token blank { \n }
+    token blank { " "**0..3\n }
     token start-indent { " "**0..3 }
     token para { <start-indent> $<text>=(<-[ \n ]>+) \n }
     token atx-heading { <start-indent> ("#"**1..6) ((" "|\t)* $<text>=(<-[ \n ]>*))? \n }

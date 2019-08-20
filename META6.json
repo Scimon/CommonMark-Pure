@@ -10,17 +10,7 @@
   "name" : "CommonMark::Pure",
   "perl" : "6.c",
   "provides" : {
-    "CommonMark::PP6" : "lib/CommonMark/PP6.pm6",
-    "CommonMark::PP6::Blank" : "lib/CommonMark/PP6/Blank.pm6",
-    "CommonMark::PP6::HRule" : "lib/CommonMark/PP6/HRule.pm6",
-    "CommonMark::PP6::IndentedCode" : "lib/CommonMark/PP6/IndentedCode.pm6",
-    "CommonMark::PP6::MarkdownActions" : "lib/CommonMark/PP6/MarkdownActions.pm6",
-    "CommonMark::PP6::MarkdownGrammar" : "lib/CommonMark/PP6/MarkdownGrammar.pm6",
-    "CommonMark::PP6::Node" : "lib/CommonMark/PP6/Node.pm6",
-    "CommonMark::PP6::Para" : "lib/CommonMark/PP6/Para.pm6",
-    "CommonMark::PP6::Renderable" : "lib/CommonMark/PP6/Renderable.pm6",
-    "CommonMark::PP6::SetXHeading" : "lib/CommonMark/PP6/SetXHeading.pm6",
-    "CommonMark::PP6::Text" : "lib/CommonMark/PP6/Text.pm6"
+    "CommonMark::Pure" : "lib/CommonMark/Pure.pm6"
   },
   "resources" : [ ],
   "source-url" : "https://github.com/Scimon/P6-CommonMark-PP6.git",

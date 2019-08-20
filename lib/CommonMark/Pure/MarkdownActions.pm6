@@ -17,7 +17,7 @@ class CommonMark::Pure::MarkdownActions is export {
         if $!current-block {
             @!blocks.push( $!current-block );
         }
-        $!html = make @!blocks.map( *.render ).join("\n");
+        $!html = make @!blocks.map( *.render ).grep( ?* ).join("\n");
     }
 
     method block-type($/) {
