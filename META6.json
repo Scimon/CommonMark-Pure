@@ -1,4 +1,5 @@
 {
+  "auth" : "github:scimon",
   "authors" : [
     "Simon Proctor"
   ],
@@ -9,8 +10,7 @@
   "name" : "CommonMark::PP6",
   "perl" : "6.c",
   "provides" : {
-    "CommonMark::PP6" : "lib/CommonMark/PP6.pm6",
-    "CommonMark::PP6::IndentedCode" : "lib/CommonMark/PP6/IndentedCode.pm6"
+    "CommonMark::PP6" : "lib/CommonMark/PP6.pm6"
   },
   "resources" : [ ],
   "source-url" : "https://github.com/Scimon/P6-CommonMark-PP6.git",

@@ -1,6 +1,6 @@
 use v6;
 
-unit class CommonMark::PP6:ver<0.0.1>;
+unit class CommonMark::PP6:ver<0.0.1>:auth<github:scimon>;
 
 use CommonMark::PP6::MarkdownGrammar;
 use CommonMark::PP6::MarkdownActions;
