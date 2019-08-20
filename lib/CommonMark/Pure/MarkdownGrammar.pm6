@@ -6,8 +6,8 @@ grammar CommonMark::Pure::MarkdownGrammar is export {
     token TOP { <block>+ }
     token block { <block-type> }
     token block-type { <atx-heading> || <setx-heading> || <indented-code> || <hrule> || <para> || <blank> }
-    token blank { " "**0..3\n }
     token start-indent { " "**0..3 }
+    token blank { <start-indent> \n }
     token para { <start-indent> $<text>=(<-[ \n ]>+) \n }
     token atx-heading { <start-indent> ("#"**1..6) ((" "|\t)* $<text>=(<-[ \n ]>*))? \n }
     token setx-heading { <start-indent> $<type>=("=" | "-")+ (" "|\t)* \n }
