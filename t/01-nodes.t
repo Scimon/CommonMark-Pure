@@ -31,7 +31,4 @@ ok $m2 ~~ Any, "Merge occured";
 
 is $m1.render, "<p>testtest2</p>", "Paragraph Merge OK";
 
-#my $first = CommonMark::Pure::Node.new( :tag<p>, :content[CommonMark::Pure::Text.new( :text("test") )] );
-#my $continue = CommonMark::Pure::Continue.new( :content[CommonMark::Pure::Text.new( :text("test2") )] );
-
 done-testing;
