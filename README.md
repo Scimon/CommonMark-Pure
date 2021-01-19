@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Scimon/P6-CommonMark-PP6.svg?branch=master)](https://travis-ci.org/Scimon/P6-CommonMark-PP6)
+[![Build Status](https://travis-ci.org/Scimon/CommonMark-Pure.svg?branch=master)](https://travis-ci.org/Scimon/CommonMark-Pure)
 
 NAME
 ====
@@ -10,13 +10,12 @@ SYNOPSIS
 
 ```perl6
 use CommonMark::Pure;
-
 ```
 
 DESCRIPTION
 ===========
 
-CommonMark::Pure is ...
+CommonMark::Pure is a Pure Raku Grammar based Markdown parser.
 
 AUTHOR
 ======
@@ -26,6 +25,7 @@ Simon Proctor <simon.proctor@gmail.com>
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2019 Simon Proctor
+Copyright 2021 Simon Proctor
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+

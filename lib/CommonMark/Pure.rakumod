@@ -29,7 +29,7 @@ use CommonMark::Pure;
 
 =head1 DESCRIPTION
 
-CommonMark::Pure is ...
+CommonMark::Pure is a Pure Raku Grammar based Markdown parser.
 
 =head1 AUTHOR
 
@@ -37,7 +37,7 @@ Simon Proctor <simon.proctor@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2019 Simon Proctor
+Copyright 2021 Simon Proctor
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
