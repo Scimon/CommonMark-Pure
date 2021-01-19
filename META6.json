@@ -10,18 +10,7 @@
   "name" : "CommonMark::Pure",
   "perl" : "6.c",
   "provides" : {
-    "CommonMark::Pure" : "lib/CommonMark/Pure.pm6",
-    "CommonMark::Pure::Blank" : "lib/CommonMark/Pure/Blank.pm6",
-    "CommonMark::Pure::Break" : "lib/CommonMark/Pure/Break.pm6",
-    "CommonMark::Pure::HRule" : "lib/CommonMark/Pure/HRule.pm6",
-    "CommonMark::Pure::IndentedCode" : "lib/CommonMark/Pure/IndentedCode.pm6",
-    "CommonMark::Pure::MarkdownActions" : "lib/CommonMark/Pure/MarkdownActions.pm6",
-    "CommonMark::Pure::MarkdownGrammar" : "lib/CommonMark/Pure/MarkdownGrammar.pm6",
-    "CommonMark::Pure::Node" : "lib/CommonMark/Pure/Node.pm6",
-    "CommonMark::Pure::Para" : "lib/CommonMark/Pure/Para.pm6",
-    "CommonMark::Pure::Renderable" : "lib/CommonMark/Pure/Renderable.pm6",
-    "CommonMark::Pure::SetXHeading" : "lib/CommonMark/Pure/SetXHeading.pm6",
-    "CommonMark::Pure::Text" : "lib/CommonMark/Pure/Text.pm6"
+    "CommonMark::Pure" : "lib/CommonMark/Pure.rakumod"
   },
   "resources" : [ ],
   "source-url" : "https://github.com/Scimon/CommonMark-Pure.git",
