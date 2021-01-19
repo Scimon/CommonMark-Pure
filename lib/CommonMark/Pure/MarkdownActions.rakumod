@@ -46,7 +46,7 @@ class CommonMark::Pure::MarkdownActions is export {
 
         my $type = $/<type>[0].Str;
 
-        make SetXHeading.new( level => ($type ~~ "=" ?? 1 !! 2) );
+        make SetXHeading.new( level => ($type ~~ "=" ?? 1 !! 2), :content[ Text.new( :text( $/<para><text>.Str.trim ))] );
     }
 
     method para($/)  {

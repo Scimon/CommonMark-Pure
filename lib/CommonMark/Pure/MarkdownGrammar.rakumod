@@ -12,7 +12,7 @@ grammar CommonMark::Pure::MarkdownGrammar is export {
     token blank { <start-indent> \n }
     token para { <start-indent> $<text>=(<-[ \n ]>+) \n }
     token atx-heading { <start-indent> ("#"**1..6) ((" "|\t)* $<text>=(<-[ \n ]>*))? \n }
-    token setx-heading { <start-indent> $<type>=("=" | "-")+ (" "|\t)* \n }
+    token setx-heading { $<para>=<para> \n <start-indent> $<type>=("=" | "-")+ (" "|\t)* \n }
     token hrule { <start-indent> ( <hrule-star> | <hrule-dash> | <hrule-under> ) " "* \n }
     token hrule-star  { "*" (" "|\t)* "*" (" "|\t)* "*" (\t|" "|"*")* }
     token hrule-dash  { "-" (" "|\t)* "-" (" "|\t)* "-" (\t|" "|"-")* }
