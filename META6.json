@@ -4,7 +4,9 @@
     "Simon Proctor"
   ],
   "build-depends" : [ ],
-  "depends" : [ ],
+  "depends" : [
+    "HTML::Escape"
+  ],
   "description" : "Non compiled Implementation of CommonMark spec.",
   "license" : "Artistic-2.0",
   "name" : "CommonMark::Pure",

@@ -39,7 +39,7 @@ class CommonMark::Pure::MarkdownActions is export {
     }
 
     method indented-code($/) {
-        make IndentedCode.new( :content[ Text.new( :text( $/<text>.Str ) ) ] );
+        make IndentedCode.new( :content[ Text.new( :text( $/<text>.Str ), :trim(False), :escape(True) ) ] );
     }
     
     method setx-heading($/) {
