@@ -12,7 +12,8 @@
   "name" : "CommonMark::Pure",
   "perl" : "6.c",
   "provides" : {
-    "CommonMark::Pure" : "lib/CommonMark/Pure.rakumod"
+    "CommonMark::Pure" : "lib/CommonMark/Pure.rakumod",
+    "CommonMark::Pure::BlockQuote" : "lib/CommonMark/Pure/BlockQuote.rakumod"
   },
   "resources" : [ ],
   "source-url" : "https://github.com/Scimon/CommonMark-Pure.git",

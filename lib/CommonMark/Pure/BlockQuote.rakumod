@@ -15,6 +15,15 @@ class CommonMark::Pure::BlockQuote does Node is export {
         return self;
     }
 
+    multi method merge ( CommonMark::Pure::Para $new ) {
+        if self.content[*-1].WHAT ~~ CommonMark::Pure::Para {
+            self.content[*-1].content.push( Text.new( text => "\n"), |$new.content );
+            return self;
+        } else {
+            return ( self, $new );
+        }
+    }
+
     method render {
         "<{$!tag}>\n{@.content.map( { $_.render } ).join("").chomp}\n</{$!tag}>";
     }
