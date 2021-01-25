@@ -7,6 +7,7 @@ use CommonMark::Pure::Blank;
 use CommonMark::Pure::Para;
 use CommonMark::Pure::SetXHeading;
 use CommonMark::Pure::IndentedCode;
+use CommonMark::Pure::BlockQuote;
 
 class CommonMark::Pure::MarkdownActions is export {
     has $.html;
@@ -18,6 +19,10 @@ class CommonMark::Pure::MarkdownActions is export {
             @!blocks.push( $!current-block );
         }
         $!html = make @!blocks.map( *.render ).grep( ?* ).join("\n");
+    }
+
+    method blockquote($/) {
+        make BlockQuote.new( :tag( "blockquote"), :content[ $/<block-type>.made ] );
     }
 
     method block-type($/) {
@@ -61,8 +66,12 @@ class CommonMark::Pure::MarkdownActions is export {
         make Blank.new();
     }
 
+    method container($/) {
+        make $/<blockquote>.made;
+    }
+
     method block($/) {
-        my $made = $<block-type>.made;
+        my $made = $/<container>.made || $/<block-type>.made; 
         if $!current-block {
             my $new;
             ( $!current-block, $new ) = $!current-block.merge( $made );
