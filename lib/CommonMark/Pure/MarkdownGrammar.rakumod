@@ -6,7 +6,7 @@ grammar CommonMark::Pure::MarkdownGrammar is export {
     token TOP { <block>+ }
     token block { <container> || <block-type> }
     token container { <blockquote> }
-    token blockquote { <start-indent> ">" " "? <block-type> }
+    token blockquote { <start-indent> ">" " "? $<inner>=(<blockquote> || <block-type> ) }
     token block-type { <atx-heading> || <setx-heading> || <indented-code> || <hrule> || <para> || <blank> }
     regex start-indent { " "**0..3 }
     token blank { <start-indent> \n }

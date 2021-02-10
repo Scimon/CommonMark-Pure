@@ -13,7 +13,7 @@ sub MAIN() {
         $count++;
         next if %ids.elems && $count.Str !(elem) %ids;
         my $got = CommonMark::Pure.to-html( %test{'markdown'} );
-        is $got, %test{'html'}, "%test<section> : %test<example> markdown : '{ %test{'markdown'}.subst( /\n/, '\\n', :g )}'";
+        is %test{'html'}, $got, "%test<section> : %test<example> markdown : '{ %test{'markdown'}.subst( /\n/, '\\n', :g )}'";
         CATCH {
             default {
                 flunk "%test<section> : %test<example> markdown : '{ %test{'markdown'}.subst( /\n/, '\\n', :g )}' : {$_.message}";

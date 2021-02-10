@@ -22,7 +22,8 @@ class CommonMark::Pure::MarkdownActions is export {
     }
 
     method blockquote($/) {
-        make BlockQuote.new( :tag( "blockquote"), :content[ $/<block-type>.made ] );
+        my $made = $/<inner><blockquote>.made || $/<inner><block-type>.made;
+        make BlockQuote.new( :tag( "blockquote"), :content[ $made ] );
     }
 
     method block-type($/) {
